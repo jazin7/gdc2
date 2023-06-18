@@ -3,8 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class BattleUIController : MonoBehaviour
 {
+
+    private AudioSource audioSource;
+    public AudioClip SFXOk;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void BackToDungeon()
     {
+        audioSource.PlayOneShot(SFXOk); // Play SFXOk when the player runs
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null && GameManagerScript.instance != null)
         {
