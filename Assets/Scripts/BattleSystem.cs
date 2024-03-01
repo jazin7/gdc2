@@ -52,8 +52,8 @@ public class BattleSystem : MonoBehaviour
         enemyHealthUI.text = "Enemy HP: " + enemyHealth;
 
 
-        float playerHealthPercentage = (float)playerHealth / 10; // assuming max player health is 10
-        float enemyHealthPercentage = (float)enemyHealth / 20; // assuming max enemy health is 20
+        float playerHealthPercentage = (float)playerHealth / 10; 
+        float enemyHealthPercentage = (float)enemyHealth / 20; 
 
         playerHealthBar.rectTransform.sizeDelta = new Vector2(MAX_HEALTH_BAR_WIDTH * playerHealthPercentage, playerHealthBar.rectTransform.sizeDelta.y);
         enemyHealthBar.rectTransform.sizeDelta = new Vector2(MAX_HEALTH_BAR_WIDTH * enemyHealthPercentage, enemyHealthBar.rectTransform.sizeDelta.y);
@@ -64,7 +64,7 @@ public class BattleSystem : MonoBehaviour
     public void PlayerAttack()
     {
         ButtonDisable();
-        audioSource.PlayOneShot(SFXHit); // Play SFXHit when the player attacks
+        audioSource.PlayOneShot(SFXHit); 
 
         int damage = Random.Range(1, 3);
         enemyHealth -= damage;
@@ -74,7 +74,7 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(ResetHitAnimation());
         battleMessage.text = "<color=lightblue>You hit the enemy for " + damage + " damage.</color>";
 
-        playerIsDefending = false; // The player is not defending anymore after attacking
+        playerIsDefending = false; 
 
         if (enemyHealth <= 0)
         {
@@ -86,7 +86,7 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator WaitThenEnemyTurn()
     {
-        yield return new WaitForSeconds(2.0f); // adjust delay as needed
+        yield return new WaitForSeconds(2.0f); 
         EnemyTurn();
         UpdateUI();
     }
@@ -98,7 +98,7 @@ public class BattleSystem : MonoBehaviour
         int healAmount = 5;
         playerHealth += healAmount;
 
-        audioSource.PlayOneShot(SFXJump); // Play SFXJump when the player heals
+        audioSource.PlayOneShot(SFXJump); 
 
 
         if (playerHealth > 10)
@@ -108,7 +108,7 @@ public class BattleSystem : MonoBehaviour
 
         battleMessage.text = "<color=lightblue>You healed yourself for " + healAmount + " health.</color>";
 
-        playerIsDefending = false; // The player is not defending anymore after healing
+        playerIsDefending = false; 
         EnemyTurn();
 
         UpdateUI();
@@ -117,7 +117,7 @@ public class BattleSystem : MonoBehaviour
     public void PlayerDefend()
     {
         playerIsDefending = true;
-        audioSource.PlayOneShot(SFXSword); // Play SFXSword when the player defends
+        audioSource.PlayOneShot(SFXSword);
 
         battleMessage.text = "<color=lightblue>You are defending.</color>";
 
@@ -132,7 +132,7 @@ public class BattleSystem : MonoBehaviour
 
         if (enemyIsCharging)
         {
-            audioSource.PlayOneShot(SFXAlert); // Play SFXAlert when the enemy is charging
+            audioSource.PlayOneShot(SFXAlert);
             enemyAnimator.SetBool("usesSpecial", true);
             enemyAnimator2.SetBool("usesSpecial", true);
             enemyAnimator3.SetBool("usesSpecial", true);
@@ -150,17 +150,16 @@ public class BattleSystem : MonoBehaviour
             }
 
             enemyIsCharging = false;
-            playerIsDefending = false; // The player is not defending anymore after the enemy's turn
+            playerIsDefending = false; 
         }
         else
         {
-            float chance = Random.value; // Generates a random value between 0 and 1
+            float chance = Random.value;
 
             if (chance <= 0.8f)
             {
-                audioSource.PlayOneShot(SFXHit2); // Play SFXHit2 when the enemy does a normal attack
+                audioSource.PlayOneShot(SFXHit2); 
 
-                // Enemy does a normal attack
                 int damage = playerIsDefending ? 0 : Random.Range(2, 5);
                 playerHealth -= damage;
                 battleMessage.text += "<color=#FF8080FF>\nThe enemy hit you for " + damage + " damage.</color>";
@@ -171,12 +170,11 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                // Enemy starts charging its attack
                 enemyIsCharging = true;
                 battleMessage.text += "<color=#FF8080FF>\nThe enemy is charging its attack!</color>";
             }
 
-            playerIsDefending = false; // The player is not defending anymore after the enemy's turn
+            playerIsDefending = false; 
         }
 
         if (playerHealth <= 0)
@@ -210,7 +208,7 @@ public class BattleSystem : MonoBehaviour
         SceneManager.LoadScene("Dungeon");
     }
 
-    public void EndTurn() // Call this method when the enemy's health reaches 0
+    public void EndTurn() 
     {
         ButtonDisable();
         StartCoroutine(EndBattle("<color=green>You won the battle!</color>"));
@@ -219,7 +217,7 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator ResetHitAnimation()
     {
-        yield return new WaitForSeconds(1.0f); // Wait for one second
+        yield return new WaitForSeconds(1.0f); 
         enemyAnimator.SetBool("isHit", false);
         enemyAnimator2.SetBool("isHit", false);
         enemyAnimator3.SetBool("isHit", false);
@@ -227,7 +225,7 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(1.0f); // Wait for 1 second
+        yield return new WaitForSeconds(1.0f); 
         enemyAnimator.SetBool("usesAttack", false);
         enemyAnimator2.SetBool("usesAttack", false);
         enemyAnimator3.SetBool("usesAttack", false);

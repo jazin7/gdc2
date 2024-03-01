@@ -5,20 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class SlimeBattleTrigger : MonoBehaviour
 {
-    public string enemyName;  // add this line
+    public string enemyName; 
     private bool isPlayerInRange = false;
 
     private void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.Space))
         {
-            // Save player position
             GameManagerScript.instance.playerPosition = GameObject.Find("Player").transform.position;
 
-            // Save the name of the enemy to spawn
             PlayerPrefs.SetString("EnemyToSpawn", enemyName);
 
-            // Load BattleScene
             SceneManager.LoadScene("BattleScene");
         }
     }

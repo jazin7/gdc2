@@ -13,7 +13,7 @@ public class BattleUIController : MonoBehaviour
     }
     public void BackToDungeon()
     {
-        audioSource.PlayOneShot(SFXOk); // Play SFXOk when the player runs
+        audioSource.PlayOneShot(SFXOk); 
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null && GameManagerScript.instance != null)

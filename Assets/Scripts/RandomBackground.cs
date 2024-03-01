@@ -30,7 +30,7 @@ public class RandomBackground : MonoBehaviour
         "00051-3464884740",
         "00052-3464884741",
         "00053-3464884742",
-        // Add other image names here
+
     };
 
     void Start()
@@ -38,7 +38,6 @@ public class RandomBackground : MonoBehaviour
         // Choose a random image name from the array
         string chosenImageName = backgroundImageNames[Random.Range(0, backgroundImageNames.Length)];
 
-        // Load the chosen image from the Resources folder
         Sprite chosenImage = Resources.Load<Sprite>(chosenImageName);
 
         // Get the Image component of this GameObject and set its sprite to the chosen image
